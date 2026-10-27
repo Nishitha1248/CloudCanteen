@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}CloudCanteen{% endblock %}
+{% block content %}
+<div class="hero text-center">
+  <div class="display-4 fw-bold">Skip the Queue. Pre-Order Your Food.</div>
+  <p class="lead mt-3">Order from the college canteen online and collect it when ready.</p>
+  <a href="{{ url_for('menu') if session.get('user_id') else url_for('login') }}" class="btn btn-warning btn-lg mt-2">Start Ordering</a>
+</div>
+<div class="row g-4 mt-4">
+  <div class="col-md-4"><div class="card h-100 p-3"><h4>🍔 Easy Ordering</h4><p>Select food and place your order in seconds.</p></div></div>
+  <div class="col-md-4"><div class="card h-100 p-3"><h4>☁ Cloud Powered</h4><p>Application and database can be deployed in the cloud.</p></div></div>
+  <div class="col-md-4"><div class="card h-100 p-3"><h4>📦 Track Status</h4><p>See whether your order is placed, preparing or ready.</p></div></div>
+</div>
+{% endblock %}

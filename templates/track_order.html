@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Track Order{% endblock %}
+{% block content %}
+<h2>Track {{ order.order_code }}</h2>
+<div class="status-track mt-4">
+{% for step in ['Placed','Preparing','Ready','Completed'] %}
+  <div class="status-step {% if ['Placed','Preparing','Ready','Completed'].index(step) <= ['Placed','Preparing','Ready','Completed'].index(order.status) %}active{% endif %}">
+    <div class="circle"></div><strong>{{ step }}</strong>
+  </div>
+{% endfor %}
+</div>
+<div class="alert alert-light mt-4 border">
+Current status: <strong>{{ order.status }}</strong><br>
+Total: <strong>₹{{ "%.2f"|format(order.total_amount) }}</strong>
+</div>
+{% endblock %}

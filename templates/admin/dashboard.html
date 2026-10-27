@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2>Canteen Dashboard</h2>
+<div class="row g-3 mt-2">
+<div class="col-md-3"><div class="stat"><span>Today's Orders</span><strong>{{ today_orders }}</strong></div></div>
+<div class="col-md-3"><div class="stat"><span>Placed</span><strong>{{ counts.get('Placed',0) }}</strong></div></div>
+<div class="col-md-3"><div class="stat"><span>Preparing</span><strong>{{ counts.get('Preparing',0) }}</strong></div></div>
+<div class="col-md-3"><div class="stat"><span>Ready</span><strong>{{ counts.get('Ready',0) }}</strong></div></div>
+</div>
+<div class="card p-4 mt-4">
+<h4>Completed Sales Today</h4><h2>₹{{ "%.2f"|format(today_sales) }}</h2>
+<a href="{{ url_for('admin_orders') }}" class="btn btn-dark mt-2">Manage Orders</a>
+</div>
+{% endblock %}

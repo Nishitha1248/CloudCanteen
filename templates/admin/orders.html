@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Manage Orders{% endblock %}
+{% block content %}
+<h2>All Orders</h2>
+<div class="table-responsive mt-3">
+<table class="table align-middle">
+<thead><tr><th>Order</th><th>Student</th><th>Student ID</th><th>Total</th><th>Status</th><th>Update</th></tr></thead>
+<tbody>
+{% for order in orders %}
+<tr>
+<td>{{ order.order_code }}</td><td>{{ order.student_name }}</td><td>{{ order.student_id }}</td>
+<td>₹{{ "%.2f"|format(order.total_amount) }}</td>
+<td><span class="badge text-bg-primary">{{ order.status }}</span></td>
+<td>
+<form method="post" action="{{ url_for('update_status', order_id=order.id) }}" class="d-flex gap-2">
+<select name="status" class="form-select form-select-sm">
+{% for s in ['Placed','Preparing','Ready','Completed','Cancelled'] %}
+<option {% if s==order.status %}selected{% endif %}>{{ s }}</option>
+{% endfor %}
+</select>
+<button class="btn btn-sm btn-dark">Save</button>
+</form>
+</td>
+</tr>
+{% else %}
+<tr><td colspan="6">No orders.</td></tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

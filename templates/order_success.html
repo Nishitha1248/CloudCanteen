@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Order Placed{% endblock %}
+{% block content %}
+<div class="text-center success-box">
+<h1>✅ Order Placed!</h1>
+<p class="lead">Your order has been sent to the canteen.</p>
+<h2>{{ order.order_code }}</h2>
+<p>Total: <strong>₹{{ "%.2f"|format(order.total_amount) }}</strong></p>
+<p>Status: <span class="badge text-bg-warning">{{ order.status }}</span></p>
+<a href="{{ url_for('track_order', order_code=order.order_code) }}" class="btn btn-dark">Track Order</a>
+<a href="{{ url_for('menu') }}" class="btn btn-outline-dark">Order More</a>
+</div>
+{% endblock %}

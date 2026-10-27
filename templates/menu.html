@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Menu{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Canteen Menu</h2>
+  <a href="{{ url_for('cart') }}" class="btn btn-warning">🛒 View Cart</a>
+</div>
+<div class="row g-4">
+{% for food in foods %}
+  <div class="col-md-4">
+    <div class="card food-card h-100">
+      <div class="card-body">
+        <span class="badge text-bg-secondary">{{ food.category }}</span>
+        <h4 class="mt-2">{{ food.name }}</h4>
+        <h5>₹{{ "%.2f"|format(food.price) }}</h5>
+        <form method="post" action="{{ url_for('add_to_cart', food_id=food.id) }}">
+          <button class="btn btn-dark w-100">Add to Cart</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

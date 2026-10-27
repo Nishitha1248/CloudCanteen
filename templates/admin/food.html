@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Manage Food{% endblock %}
+{% block content %}
+<h2>Manage Food</h2>
+<div class="card p-3 mb-4">
+<form method="post" action="{{ url_for('add_food') }}" class="row g-2">
+<div class="col-md-4"><input class="form-control" name="name" placeholder="Food name" required></div>
+<div class="col-md-3"><input class="form-control" name="category" placeholder="Category" required></div>
+<div class="col-md-3"><input class="form-control" name="price" type="number" step="0.01" placeholder="Price" required></div>
+<div class="col-md-2"><button class="btn btn-dark w-100">Add Food</button></div>
+</form>
+</div>
+<table class="table">
+<thead><tr><th>Food</th><th>Category</th><th>Price</th><th>Availability</th><th></th></tr></thead>
+<tbody>
+{% for food in foods %}
+<tr>
+<td>{{ food.name }}</td><td>{{ food.category }}</td><td>₹{{ "%.2f"|format(food.price) }}</td>
+<td>{{ 'Available' if food.available else 'Unavailable' }}</td>
+<td><form method="post" action="{{ url_for('toggle_food', food_id=food.id) }}"><button class="btn btn-sm btn-outline-dark">Toggle</button></form></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
